@@ -1,0 +1,39 @@
+from bs4 import BeautifulSoup
+
+# Loop through the links and scrape restaurant information
+for link in links_array:
+    try:
+        response = requests.get(link)
+        response.raise_for_status()  # Check for successful response
+
+        soup = BeautifulSoup(response.content, 'html.parser')  # Parse the HTML content
+
+        if link == 'https://magicpin.in/blog/best-bars-pubs-bangalore/':  # Example selector for vogue.in
+            restaurant_name_element = soup.find('', class_='merchant-name')
+            print(restaurant_name_element)
+        #elif 'magicpin.com' in link:  # Example selector for swiggy.com
+            #restaurant_name_element = soup.find('h2', class_='rel-handled')
+            #print(restaurant_name_element)
+        #elif 'curlytales.com' in link:
+          #restaurant_name_element = soup.find()
+        # Add more conditions for other websites
+        #if restaurant_name_element:
+            #restaurant_name = restaurant_name_element.text.strip()
+         # Extract restaurant name
+        #restaurant_name_element = soup.find('div', class_='heading-h3')
+        #if restaurant_name_element and restaurant_name_element.find('strong'):
+            #restaurant_name = restaurant_name_element.find('strong').text.strip()
+
+
+        # Print the extracted information
+        #print("Restaurant Name:", restaurant_name)
+        # print("Restaurant Details:", restaurant_details)
+        # print("---------------------------")
+
+    except Exception as e:
+        print(f"An error occurred while scraping {link}: {e}")
+
+    # Add a separator between each link's scraping
+    print("==============================")
+
+print("Scraping complete.")
